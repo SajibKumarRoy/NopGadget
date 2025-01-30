@@ -1,0 +1,75 @@
+{%- if section.settings.newsletter_enable  -%}
+<div class="newsletter">
+    <div class="newsletter-picture">
+        <img src="{{'Newslettter.webp' | asset_url }}" alt="Newsletter" height="800" width="800">
+    </div>
+    <div class="newsletter-container">
+        {%- if section.settings.newsletter_heading != blank -%}
+            <div class="title"> {{ section.settings.newsletter_heading }}</div>
+        {%- endif -%}
+        {%- if section.settings.newsletter_subtitle != blank -%}
+            <div class="sub-title">{{ section.settings.newsletter_subtitle }}</div>
+
+        {%- endif -%}
+        {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="newsletter-subscribe" id="newsletter-subscribe-block">
+            <div class="newsletter-email">
+                <input
+                  type="email"
+                  name="contact[email]"
+                  value="{{ form.email }}"
+                  aria-required="true"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  autocomplete="email"
+                  id="newsletter-email" 
+                  class="newsletter-subscribe-text" 
+                  placeholder="Enter your email here..." 
+                  aria-label="Sign up for our newsletter" 
+                  type="email"> 
+                <button type="submit" id="newsletter-subscribe-button" class="button-1 newsletter-subscribe-button">Subscribe</button>
+            </div>
+        <div class="newsletter-validation">
+            <span id="subscribe-loading-progress" style="display:none" class="please-wait">Wait...</span> 
+            <span class="field-validation-valid" data-valmsg-for="NewsletterEmail" data-valmsg-replace="true"></span>
+        </div>
+    </div>
+    {%-endform-%}
+    <div class="newsletter-result" id="newsletter-result-block"></div>
+</div>
+</div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "class": "newsletter-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "newsletter_enable",
+      "label": "Enable Newsletter",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "newsletter_heading",
+      "label": "Newsletter Heading",
+      "default": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_subtitle",
+      "label": "Newsletter Title",
+      "default": "Sign up and receive information on new collections, events and offers from us."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter",
+    }
+  ]
+}
+{% endschema %}

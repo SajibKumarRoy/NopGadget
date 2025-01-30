@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="js" lang="{{ request.locale.iso_code }}">
+<html class="js sticky-header-added" lang="{{ request.locale.iso_code }}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -256,6 +256,8 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'nopGadget.css' | asset_url | stylesheet_tag }}
+    {{ 'custom.css' | asset_url | stylesheet_tag }}
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}
@@ -296,6 +298,14 @@
         document.documentElement.classList.add('shopify-design-mode');
       }
     </script>
+    <script src="{{ 'jquery.js' | asset_url }}" defer></script>
+    <script src="{{ 'jquery-sticky.js' | asset_url }}" defer></script>
+    <script defer>
+      document.addEventListener('DOMContentLoaded', function () {
+          $('.sticky-header').sticky();
+      });
+    </script>
+
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
@@ -312,7 +322,9 @@
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
-
+    {% if template.name == 'index' %}
+      {% sections 'newsletter-section' %}
+    {% endif %}
     {% sections 'footer-group' %}
 
     <ul hidden>

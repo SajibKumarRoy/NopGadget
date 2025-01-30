@@ -1,0 +1,15 @@
+.color-scheme-1.gradient {
+    background: #E3EAF5 !important;
+  }
+body{
+    font-size: initial !important;
+    letter-spacing: initial !important;
+    line-height: initial !important;
+    background: #E3EAF5 !important;
+}
+.footer-logo-bg{
+  background: var(--page-body-color);
+}
+.search-box .search-box-text:focus-visible{
+  outline: none;
+}
